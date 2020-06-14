@@ -1,0 +1,3 @@
+[submodule "evoman_framework"]
+	path = evoman_framework
+	url = https://github.com/karinemiras/evoman_framework.git
