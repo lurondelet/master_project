@@ -4,36 +4,38 @@ from sensors import sensors
 from  random import *
 import copy
 
-###parameters
-#number of pop; survivor number(fraction).
-pop_number = 25
-survivor = 50
-pop=[]
-#fitness function number.
-fitness_number = 1
-#number of generation until stop.
-gen_number = 30
-#max depth and max split. for optimisation purpose.
-max_depth = 1000
-max_split = 500
+class Ma_Player_Controller:
+    ###parameters
+    #number of pop; survivor number(fraction).
+    pop_number = 25
+    survivor = 50
+    pop=[]
+    #fitness function number.
+    fitness_number = 1
+    #number of generation until stop.
+    gen_number = 30
+    #max depth and max split. for optimisation purpose.
+    max_depth = 1000
+    max_split = 500
 
-#####population generation
-###first generation:
-#tree generation :
-for i in range(0, pop_number):
-    pop[i]=[generate_random_tree(4),generate_random_tree(4),generate_random_tree(4),generate_random_tree(4)]
+    #####population generation
+    ###first generation:
+    #tree generation :
+    for i in range(0, pop_number):
+        pop[i]=[generate_random_tree(4),generate_random_tree(4),generate_random_tree(4),generate_random_tree(4)]
 
-###loop on pop
-
-
-#####fitness function
+    ###loop on pop
 
 
+    #####fitness function
+    for i in range(0,pop_number):
 
-#####population variation.
-###crossover : tree1, tree2, node1, node2.
-###mutation with random element.
-###reproduction: taking the X tree  and copy paste.
+
+
+    #####population variation.
+    ###crossover : tree1, tree2, node1, node2.
+    ###mutation with random element.
+    ###reproduction: taking the X tree  and copy paste.
 
 
 
@@ -83,5 +85,13 @@ def generate_random_tree(depth):
         parent_node.leftchild = generate_random_tree(depth - 1)
     return(parent_node)
 
-def parse_tree(node):
-    return(1)
+def pars_tree(node):
+    if(node.leftchild==None or node.rightchild==None):
+        return node.data
+    else:
+        if node.data == "&&":
+            return pars_tree(node.leftchild) and pars_tree(node.rightchild)
+        if node.data == "||":
+            return pars_tree(node.leftchild) or pars_tree(node.rightchild)
+        if node.data == "^":
+            return pars_tree(node.leftchild) ^ pars_tree(node.rightchild)
