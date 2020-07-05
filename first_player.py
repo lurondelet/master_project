@@ -11,11 +11,13 @@ if not os.path.exists(experiment_name):
 
 # initializes environment for single objective mode (specialist)  with static enemy and ai player
 env = Environment(experiment_name=experiment_name,
-                      playermode="ai",
-                      player_controller=player_controller(),
-                      speed="normal",
-                      enemymode="static",
-                      level=2)
+                    playermode="ai",
+                    player_controller=player_controller(),
+                    speed="normal",
+                    enemymode="static",
+                    level=2,
+                    inputcoded="yes"
+                  )
 
 
 # tests for each enemy
