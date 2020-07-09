@@ -2,7 +2,7 @@ import sys, os
 sys.path.insert(0, 'evoman')
 from environment import Environment
 from GP_controller import player_controller
-from  random import *
+from  random import choice,randrange,random
 import copy
 # imports other libs
 import numpy as np
@@ -63,28 +63,28 @@ def generate_random_tree(depth,operator='math',proba=25):
         numerical_nodes = [-100,-50,0,50,100]
     inputs =[i for i in range(1,21)]
     #add the input as ints which will serve as index to take from the real inputs array taken from the sensors.
-
-    parent_node = copy.deepcopy(random.choices(nodes))
+    node2copy = choice(nodes)
+    parent_node = copy.deepcopy(node2copy)
     p1,p2=randrange(0,100),randrange(0,100)
     #probability to have arbitrary number comparaison in the tree
     if depth-1==0:
         if p1 < proba:
-            parent_node.leftchild = Node(random.choices(inputs))
+            parent_node.leftchild = Node(choice(inputs))
         else :
-            parent_node.leftchild = Node(random.choice(numerical_nodes))
+            parent_node.leftchild = Node(choice(numerical_nodes))
         if p2 < proba:
-            parent_node.rightchild = Node(random.choice(numerical_nodes))
+            parent_node.rightchild = Node(choice(numerical_nodes))
         else :
-            parent_node.rightchild = Node(random.choices(inputs))
+            parent_node.rightchild = Node(choice(inputs))
     else:
         parent_node.rightchild = generate_random_tree(depth - 1)
         parent_node.leftchild = generate_random_tree(depth - 1)
     return parent_node
 
-class agent(Node):
-    def __init__(self,playerorenemy):
+class Agent(Node):
+    def __init__(self,playerorenemy,fitness=0):
         if playerorenemy == True:
-            self.trees=[generate_random_tree(4),
+            self.trees = [generate_random_tree(4),
                    generate_random_tree(4),
                    generate_random_tree(4),
                    generate_random_tree(4),
@@ -95,57 +95,81 @@ class agent(Node):
                    generate_random_tree(4),
                    generate_random_tree(4),
                    generate_random_tree(4)]
-        self.fitness=0
+        self.fitness=fitness
 
+    def toArray(self):
+        return np.array([self.trees,self.fitness])
+
+    def get_fitness(self):
+        return self.fitness
+    def set_fitness(self,new_fitness):
+        self.fitness=new_fitness
 
 class Population:
     def __init__(self,
-                 pop_number=25,
-                 survivor=50,
-                 fitness_number=1,
-                 gen_number=30,
+                 pop_number=5,
+                 survivor=0.2,
+                 player=True,
+                 gen_number=2,
                  max_depth=1000,
                  max_split=500
                  #,pop=[]
                  ):
+        #number of entity in the pop
         self.pop_number = pop_number
+        #number of surviving entity each epoch
         self.survivor = survivor
-        self.fitness_number = fitness_number
+        #boolean to change how th tree is parsed/treated
+        self.player = player
+        #generation number to look how time the algorithm ran
         self.gen_number = gen_number
+        #max depth and max width of the tree to stop it from going overboar
         self.max_depth = max_depth
         self.max_split = max_split
-        #self.pop = pop
+        #array stocking the agents trees
+        self.agents=np.array([])
+        for i in range(pop_number):
+            newagent = Agent(playerorenemy=self.player)
+            # self.agents = self.agents.append(newagent.toArray())
+            # self.agents = self.agents.append(newagent)
+            self.agents = np.append(self.agents, newagent)
+    #
+    # def champion(self):
+    #     self.agents *= -1
+    #     self.agents = -self.agents[self.agents[:, 1].argsort()]
+    #     return(self.agents[:self.pop_number//self.survivor])
 
-
-    # import fitness function from the given problem
-
-
-agents = Population()
+population = Population()
 envs=[]
-for i in range(agents.pop_number):
+#for each agent an environment needs to be created to run an instance of the game
+for i in range(population.pop_number):
     env=Environment(experiment_name=experiment_name,
                       playermode="ai",
-                      player_controller=player_controller(),
+                      player_controller=player_controller(population.agents[i]),
                       speed="fastest",
+                    # multiplemode="yes",
                       enemymode="static",
                       # inputcoded="yes"
                       level=2
                       )
     envs.append(env)
 
-# initializes environment with ai player using random controller, playing against static enemy
-#env = Environment(experiment_name=experiment_name)
+# loop to fight each enemies
+for g in range(1,population.gen_number):
+    for en in range(1, 9):
+        # loop on the whole population
+        for i in range(population.pop_number):
+            envs[i].update_parameter('enemies', [en])
+            # calcul de la fitness ici : avec l'environement
+            envs[i].play()
+            print(envs[i].fitness_single())
+            population.agents[i].fitness=envs[i].fitness_single()
+            print(population.agents[i].fitness)
+            # print('\n saved ' + str(en) + ' \n')
+    #population.gen_number += 1
+    #new gen : calculate champion, reset fitness, reproduce with mutation and crossover
 
 
-
-for en in range (1,9):
-    # Update the enemy
-    for i in range(agents.pop_number):
-        envs[i].update_parameter('enemies', [en])
-        #calcul de la fitness ici : avec l'environement
-        envs[i].play()
-        agents[i]=envs.fitness_single()
-        print('\n saved ' + str(en) + ' \n')
 
 
 

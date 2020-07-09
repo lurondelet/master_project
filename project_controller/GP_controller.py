@@ -1,40 +1,41 @@
 ##GP based agent
 from controller import Controller
-from sensors import sensors
 from  random import *
+import numpy as np
 import copy
 
-class player_Controller(Controller):
-    def __init__(self,pop_number=25,survivor=50 , fitness_number=1 , gen_number=30 , max_depth = 1000 , max_split = 500):
-        self.pop_number=pop_number
-        ###parameters
-        #number of pop; survivor number(fraction).
-        self.survivor=survivor
-        #pop=[]
-        #fitness function number.
-        self.fitness_number=fitness_number
-        #number of generation until stop.
-        self.gen_number = gen_number
-        #max depth and max split. for optimisation purpose.
-        self.max_depth = max_depth
-        self.max_split=max_split
-    #####population generation
+class player_controller(Controller):
+    def __init__(self, agent):
+        self.agent = agent
+    #  population generation
+    # population variation
+    # crossover : tree1, tree2, node1, node2.
+    # mutation with random element.
+    # reproduction: taking the X tree  and copy paste.
 
+    def controls(self,  inputs, Controller, population):
 
-
-    #####population variation.
-    ###crossover : tree1, tree2, node1, node2.
-    ###mutation with random element.
-    ###reproduction: taking the X tree  and copy paste.
-
-    def controls(self,inputs,Controller):
-        left,right,jump,shoot,release=0,0,0,0,0
-        return [left, right, jump, shoot, release]
-
+        left,  right, jump, shoot, release = 0, 0, 0, 0, 0
+        keys = [left, right, jump, shoot, release]
+        for i in range(len(self.agent)):
+            if pars_tree(self.agent.trees[i]) > 0.5:
+                keys[i] = 1
+            else:
+                keys[i] = 0
+        return keys
 class enemy_controller(Controller):
-    def controls(self,inputs,Controller):
-        attack1,attack2,attack3,attack4=0,0,0,0
-        return [attack1, attack2, attack3, attack4]
+    def __init__(self, agent):
+        self.agent = agent
+
+    def controls(self, inputs, Controller, population):
+        attack1, attack2, attack3, attack4 = 0, 0, 0, 0
+        keys = [attack1, attack2, attack3, attack4]
+        for i in range(len(self.agent)):
+            if pars_tree(self.agent.trees[i]) > 0.5:
+                keys[i] = 1
+            else:
+                keys[i] = 0
+        return keys
 
 
 
