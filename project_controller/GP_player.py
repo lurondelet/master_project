@@ -1,11 +1,11 @@
 import sys, os
 sys.path.insert(0, 'evoman')
 from environment import Environment
-from GP_controller import player_controller
 from  random import choice,randrange,random
 import copy
 # imports other libs
 import numpy as np
+from GP_controller import player_controller
 
 experiment_name = 'GP_agent_demo_1'
 if not os.path.exists(experiment_name):
@@ -29,17 +29,39 @@ class Node:
 
     def mutation(self):
         rng = random.random()
-        inputs =[i for i in range(1,21)]
-        if (rng < 0.9):
+        inputs = [i for i in range(1, 21)]
+        if rng < 0.9:
             node = generate_random_tree(2)
-        elif (rng > 0.8 and rng <= 0.9):
+        elif 0.8 < rng <= 0.9:
             node = random.choics(inputs)
 
-    def crossover(self,node):
-        node2=copy.deepcopy(node)
-        self.data=node2.data
-        self.leftchild=node2.leftchild
-        self.rightchild=node2.rightchild
+    def crossover(self, node):
+        node2 = copy.deepcopy(node)
+        self.data = node2.data
+        self.leftchild = node2.leftchild
+        self.rightchild = node2.rightchild
+
+def print_tree(node ,i = 0):
+    # print('node data is ', node.data)
+    array_lvl2 = []
+    array=[node.data]
+    print(i*'    ', 'LVL ', i)
+    print(i * '    ', array)
+    if node.leftchild is not None :
+        array_lvl2 += [print_tree(node.leftchild , i+1)]
+    if node.rightchild is not None :
+        array_lvl2 += [print_tree(node.rightchild , i+1)]
+    array += array_lvl2
+
+
+def copytree(tree):
+    newtree = Node()
+    newtree.data = tree.data
+    if tree.rightchild != None:
+        newtree.rightchild = copytree(tree.rightchild)
+    if tree.leftchild != None:
+        newtree.leftchild = copytree(tree.lefthchild)
+    return newtree
 
 def generate_random_tree(depth,operator='math',proba=25):
     #node pool
@@ -68,11 +90,11 @@ def generate_random_tree(depth,operator='math',proba=25):
     p1,p2=randrange(0,100),randrange(0,100)
     #probability to have arbitrary number comparaison in the tree
     if depth-1==0:
-        if p1 < proba:
+        if p1 > proba:
             parent_node.leftchild = Node(choice(inputs))
         else :
             parent_node.leftchild = Node(choice(numerical_nodes))
-        if p2 < proba:
+        if p2 > proba:
             parent_node.rightchild = Node(choice(numerical_nodes))
         else :
             parent_node.rightchild = Node(choice(inputs))
@@ -104,6 +126,8 @@ class Agent(Node):
         return self.fitness
     def set_fitness(self,new_fitness):
         self.fitness=new_fitness
+
+
 
 class Population:
     def __init__(self,
@@ -139,14 +163,17 @@ class Population:
     #     self.agents = -self.agents[self.agents[:, 1].argsort()]
     #     return(self.agents[:self.pop_number//self.survivor])
 
+def generation(population):
+    newgeneration= Population(population)
+    return newgeneration
 population = Population()
 envs=[]
 #for each agent an environment needs to be created to run an instance of the game
 for i in range(population.pop_number):
-    env=Environment(experiment_name=experiment_name,
-                      playermode="ai",
+    env = Environment(experiment_name=experiment_name,
+                      #playermode="ai",
                       player_controller=player_controller(population.agents[i]),
-                      speed="fastest",
+                      speed="normal",
                     # multiplemode="yes",
                       enemymode="static",
                       # inputcoded="yes"
@@ -160,11 +187,11 @@ for g in range(1,population.gen_number):
         # loop on the whole population
         for i in range(population.pop_number):
             envs[i].update_parameter('enemies', [en])
-            # calcul de la fitness ici : avec l'environement
+            print_tree(population.agents[i].trees[0])
+            #print(pars_tree(population.agents[i].trees[1]))
             envs[i].play()
-            print(envs[i].fitness_single())
+            #print(envs[i].fitness_single())
             population.agents[i].fitness=envs[i].fitness_single()
-            print(population.agents[i].fitness)
             # print('\n saved ' + str(en) + ' \n')
     #population.gen_number += 1
     #new gen : calculate champion, reset fitness, reproduce with mutation and crossover

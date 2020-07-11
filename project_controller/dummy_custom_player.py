@@ -1,20 +1,12 @@
-################################
-# EvoMan FrameWork - V1.0 2016 #
-# Author: Karine Miras         #
-# karine.smiras@gmail.com      #
-################################
-
 # imports framework
 import sys, os
 sys.path.insert(0, 'evoman')
+sys.path.append('evoman_framework')
+sys.path.append('evoman_framework/evoman')
+sys.path.append('project_controller')
 from environment import Environment
-from first_controller import player_controller
+from project_controller.first_controller import player_controller
 from datetime import datetime
-import time
-
-from  random import *
-
-import numpy as np
 
 experiment_name = 'dummy_custom_demo'
 #file_aux = open(experiment_name + '/evoman_logs.txt', 'w')

@@ -14,3 +14,4 @@ For those who already have a working evoman framework, you can find all the cust
 ## retriving the data
 
 Once the player program are ran at least once, the data will be sent to a folder with matching name.
+

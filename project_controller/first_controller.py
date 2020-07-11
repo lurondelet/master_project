@@ -1,72 +1,94 @@
-##GP based agent
 from controller import Controller
-from  random import *
-import numpy as np
-import copy
 
 class player_controller(Controller):
-    def __init__(self, agent):
-        self.agent = agent
-    #  population generation
-    # population variation
-    # crossover : tree1, tree2, node1, node2.
-    # mutation with random element.
-    # reproduction: taking the X tree  and copy paste.
+    def __init__(self,nothing='nothing'):
+        self.nothing=nothing
+    def control(self,inputs, controller):
+        #inputs = (inputs - min(inputs)) / float((max(inputs) - min(inputs)))
+        #print(inputs)
+        #for i in range(len(inputs)-1):
 
-    def controls(self,  inputs, Controller, population):
+        #closing up the distance without bullet
+        if inputs[0] >= 100:
+            left = 1
+        else:
+            left = 0
 
-        left,  right, jump, shoot, release = 0, 0, 0, 0, 0
-        keys = [left, right, jump, shoot, release]
-        for i in range(len(self.agent)):
-            if pars_tree(self.agent.trees[i]) > 0.5:
-                keys[i] = 1
-            else:
-                keys[i] = 0
-        return keys
+        if inputs[0] <= -100:
+            right = 1
+        else:
+            right = 0
+        #if player is below enemy or
+        if inputs[1] >0:
+            jump = 1
+        else:
+            jump = 0
+
+        #dodge vertical bullet
+        for i in range(8):
+            #vertical bullet
+            if inputs[4+i*2] != 0 : #and inputs[5+i*2] == 0 :
+                if inputs[0] <= -100:
+                    left = 0
+                    right = 1
+                elif inputs[0] >= 100:
+                    right = 0
+                    left = 1
+                else :
+                    if inputs[0] > 0:
+                        right = 1
+                        left = 0
+                    else :
+                        right = 0
+                        left = 1
+
+            #horizontal bullet
+            if inputs[5+i*2] != 0 :
+                if inputs[4+i*2]>0:
+                    jump = 1
+                    release = 0
+                else:
+                    jump = 0
+                    release = 1
+        #if both are at the same horizontal pos then shoot
+        #if inputs[1] == inputs[3]:
+        #    shoot = 1
+        #else:
+        #    shoot = 0
+
+        if inputs[4] > 0.5:
+            release = 1
+        else:
+            release = 0
+
+        shoot = 1
+        print([left, right, jump, shoot, release])
+        return [left, right, jump, shoot, release]
+
 class enemy_controller(Controller):
-    def __init__(self, agent):
-        self.agent = agent
 
-    def controls(self, inputs, Controller, population):
-        attack1, attack2, attack3, attack4 = 0, 0, 0, 0
-        keys = [attack1, attack2, attack3, attack4]
-        for i in range(len(self.agent)):
-            if pars_tree(self.agent.trees[i]) > 0.5:
-                keys[i] = 1
-            else:
-                keys[i] = 0
-        return keys
+    def control(self,inputs,Controller):
+        #inputs = (inputs - min(inputs)) / float((max(inputs) - min(inputs)))
+        if inputs[0] >= 0:
+            attack1 = 1
+        else:
+            attack1 = 0
 
+        if inputs[0] < 0:
+            attack2 = 1
+        else:
+            attack2 = 0
 
+        if inputs[1] >= 0:
+            attack3 = 1
+        else:
+            attack3 = 0
 
-##mathematical expression operator < > <
+        if inputs[1] < 0:
+            attack4 = 1
+        else:
+            attack4 = 0
 
-##boolean expression
-def pars_tree_bool(node):
-    if node.leftchild == None or node.rightchild == None:
-        return node.data
-    else:
-        if node.data == "&&":
-            return pars_tree_bool(node.leftchild) and pars_tree_bool(node.rightchild)
-        if node.data == "||":
-            return pars_tree_bool(node.leftchild) or pars_tree_bool(node.rightchild)
-        if node.data == "^":
-            return pars_tree_bool(node.leftchild) ^ pars_tree_bool(node.rightchild)
+        return [attack1, attack2, attack3, attack4]
 
-def pars_tree(node):
-    if node.leftchild == None or node.rightchild == None:
-        return node.data
-    else:
-        #go for a switch case  here
-        if node.data == '<':
-            return pars_tree(node.leftchild) < pars_tree_bool(node.rightchild)
-        if node.data == '>':
-            return pars_tree(node.leftchild) > pars_tree_bool(node.rightchild)
-        if node.data == '<=':
-            return pars_tree(node.leftchild) <= pars_tree_bool(node.rightchild)
-        if node.data == '>=':
-            return pars_tree(node.leftchild) >= pars_tree_bool(node.rightchild)
-        if node.data == '=':
-            return pars_tree(node.leftchild) == pars_tree(node.rightchild)
-        if node.data == '!=':
-            return pars_tree(node.leftchild) != pars_tree(node.rightchild)
+#function for both
