@@ -15,7 +15,8 @@ class player_controller(Controller):
     # crossover : tree1, tree2, node1, node2.
     # mutation with random element.
     # reproduction: taking the X tree  and copy paste.
-
+    def refresh_input(self):
+        return 1
     def control(self,  inputs, Controller):
 
         #print(self.agent.fitness)
@@ -77,7 +78,7 @@ def pars_tree(node):
         # print(node.data)
         # print(node.leftchild.data)
         # print(node.rightchild.data)
-        print(node.leftchild.data, '(', type(node.leftchild.data), ')', ',', node.data, ',', node.rightchild.data, '(', type(node.rightchild.data), ')')
+        # print(node.leftchild.data, '(', type(node.leftchild.data), ')', ',', node.data, ',', node.rightchild.data, '(', type(node.rightchild.data), ')')
         # print(type(node.leftchild.data),type(node.rightchild.data))
         if node.data == '<':
             # print('leftchild : \'',node.leftchild.data,'\' INFERIOR ,rightchild : \'',node.rightchild.data,'\'' )
