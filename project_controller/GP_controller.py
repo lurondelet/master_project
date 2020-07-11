@@ -66,61 +66,40 @@ def pars_tree_bool(node):
 
 def pars_tree(node):
     if node.leftchild is None or node.rightchild is None:
-        print(type(node.data)is None)
-            # result=0
-            # if node.data == '<':
-            #     # print('leftchild : \'',node.leftchild.data,'\' INFERIOR ,rightchild : \'',node.rightchild.data,'\'' )
-            #     result= pars_tree(node.leftchild) < pars_tree_bool(node.rightchild)
-            # if node.data == '>':
-            #     # print('leftchild : \'',node.leftchild.data,'\' SUPERIOR rightchild : \'',node.rightchild.data,'\'' )
-            #     result= pars_tree(node.leftchild) > pars_tree_bool(node.rightchild)
-            # if node.data == '<=':
-            #     # print('leftchild : \'',node.leftchild.data,'\' INF,EQUAL rightchild : \'',node.rightchild.data,'\'' )
-            #     result = pars_tree(node.leftchild) <= pars_tree_bool(node.rightchild)
-            # if node.data == '>=':
-            #     # print('leftchild : \'',node.leftchild.data,'\' SUP,EQUAL rightchild : \'',node.rightchild.data,'\'' )
-            #     result = pars_tree(node.leftchild) >= pars_tree_bool(node.rightchild)
-            # if node.data == '=':
-            #     # print('leftchild : \'',node.leftchild.data,'\' EQUAL rightchild : \'',node.rightchild.data,'\'' )
-            #     result = pars_tree(node.leftchild) == pars_tree(node.rightchild)
-            # if node.data == '!=':
-            #     # print('leftchild : \'',node.leftchild.data,'\' INEQUAL rightchild : \'',node.rightchild.data ,'\'')
-            #     result = pars_tree(node.leftchild) != pars_tree(node.rightchild)
-            #
-            # node.data =  result
-            # print('CHANGED')
-
-        print('data is',node.data)
+        # print(type(node.data)is None)
+        # print('data is',node.data)
         return node.data
     else:
-        print('----------NEW ETAPE----------')
-        print(node.leftchild.data, ',', node.data, ',', node.rightchild.data)
-        # print(type(node.leftchild.data), ',', type(node.data), ',', type(node.rightchild.data))
-        print('PARAMETRE DE BASE')
-        print(node.data)
-        print(node.leftchild.data)
-        print(node.rightchild.data)
+        # print('----------NEW ETAPE----------')
+        # print(node.leftchild.data, ',', node.data, ',', node.rightchild.data)
+        # # print(type(node.leftchild.data), ',', type(node.data), ',', type(node.rightchild.data))
+        # print('PARAMETRE DE BASE')
+        # print(node.data)
+        # print(node.leftchild.data)
+        # print(node.rightchild.data)
+        print(node.leftchild.data, '(', type(node.leftchild.data), ')', ',', node.data, ',', node.rightchild.data, '(', type(node.rightchild.data), ')')
+        # print(type(node.leftchild.data),type(node.rightchild.data))
         if node.data == '<':
             # print('leftchild : \'',node.leftchild.data,'\' INFERIOR ,rightchild : \'',node.rightchild.data,'\'' )
-            node.data=pars_tree(node.leftchild) < pars_tree_bool(node.rightchild)
-            return pars_tree(node.leftchild) < pars_tree_bool(node.rightchild)
+            # node.data = pars_tree(node.leftchild) < pars_tree_bool(node.rightchild)
+            return pars_tree(node.leftchild) < pars_tree(node.rightchild)
         if node.data == '>':
             # print('leftchild : \'',node.leftchild.data,'\' SUPERIOR rightchild : \'',node.rightchild.data,'\'' )
-            node.data=pars_tree(node.leftchild) > pars_tree_bool(node.rightchild)
-            return pars_tree(node.leftchild) > pars_tree_bool(node.rightchild)
+            # node.data=pars_tree(node.leftchild) > pars_tree_bool(node.rightchild)
+            return pars_tree(node.leftchild) > pars_tree(node.rightchild)
         if node.data == '<=':
             # print('leftchild : \'',node.leftchild.data,'\' INF,EQUAL rightchild : \'',node.rightchild.data,'\'' )
-            node.data=pars_tree(node.leftchild) <= pars_tree_bool(node.rightchild)
-            return pars_tree(node.leftchild) <= pars_tree_bool(node.rightchild)
+            # node.data=pars_tree(node.leftchild) <= pars_tree_bool(node.rightchild)
+            return pars_tree(node.leftchild) <= pars_tree(node.rightchild)
         if node.data == '>=':
             # print('leftchild : \'',node.leftchild.data,'\' SUP,EQUAL rightchild : \'',node.rightchild.data,'\'' )
-            node.data=pars_tree(node.leftchild) >= pars_tree_bool(node.rightchild)
-            return pars_tree(node.leftchild) >= pars_tree_bool(node.rightchild)
+            # node.data=pars_tree(node.leftchild) >= pars_tree_bool(node.rightchild)
+            return pars_tree(node.leftchild) >= pars_tree(node.rightchild)
         if node.data == '=':
             # print('leftchild : \'',node.leftchild.data,'\' EQUAL rightchild : \'',node.rightchild.data,'\'' )
-            node.data=pars_tree(node.leftchild) == pars_tree_bool(node.rightchild)
+            # node.data=pars_tree(node.leftchild) == pars_tree_bool(node.rightchild)
             return pars_tree(node.leftchild) == pars_tree(node.rightchild)
         if node.data == '!=':
             # print('leftchild : \'',node.leftchild.data,'\' INEQUAL rightchild : \'',node.rightchild.data ,'\'')
-            node.data=pars_tree(node.leftchild) != pars_tree_bool(node.rightchild)
+            # node.data=pars_tree(node.leftchild) != pars_tree_bool(node.rightchild)
             return pars_tree(node.leftchild) != pars_tree(node.rightchild)

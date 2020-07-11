@@ -110,7 +110,6 @@ class Agent(Node):
                    generate_random_tree(4),
                    generate_random_tree(4),
                    generate_random_tree(4),
-                   generate_random_tree(4),
                    generate_random_tree(4)]
         else:
             self.trees=[generate_random_tree(4),
@@ -173,7 +172,7 @@ for i in range(population.pop_number):
     env = Environment(experiment_name=experiment_name,
                       #playermode="ai",
                       player_controller=player_controller(population.agents[i]),
-                      speed="normal",
+                      speed="fastest",
                     # multiplemode="yes",
                       enemymode="static",
                       # inputcoded="yes"
