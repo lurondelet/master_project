@@ -7,7 +7,7 @@ import copy
 import numpy as np
 from GP_controller import player_controller
 
-experiment_name = 'GP_agent_demo_1'
+experiment_name = 'GP_agent_demo'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
@@ -52,7 +52,6 @@ def print_tree(node ,i = 0):
     if node.rightchild is not None :
         array_lvl2 += [print_tree(node.rightchild , i+1)]
     array += array_lvl2
-
 
 def copytree(tree):
     newtree = Node()
@@ -103,6 +102,10 @@ def generate_random_tree(depth,operator='math',proba=25):
         parent_node.leftchild = generate_random_tree(depth - 1)
     return parent_node
 
+def generation(population):
+    newgeneration= Population(population)
+    return newgeneration
+
 class Agent(Node):
     def __init__(self,playerorenemy,fitness=0):
         if playerorenemy == True:
@@ -125,8 +128,6 @@ class Agent(Node):
         return self.fitness
     def set_fitness(self,new_fitness):
         self.fitness=new_fitness
-
-
 
 class Population:
     def __init__(self,
@@ -162,9 +163,7 @@ class Population:
     #     self.agents = -self.agents[self.agents[:, 1].argsort()]
     #     return(self.agents[:self.pop_number//self.survivor])
 
-def generation(population):
-    newgeneration= Population(population)
-    return newgeneration
+
 population = Population()
 envs=[]
 #for each agent an environment needs to be created to run an instance of the game
@@ -186,7 +185,7 @@ for g in range(1,population.gen_number):
         # loop on the whole population
         for i in range(population.pop_number):
             envs[i].update_parameter('enemies', [en])
-            print_tree(population.agents[i].trees[0])
+            #print_tree(population.agents[i].trees[0])
             #print(pars_tree(population.agents[i].trees[1]))
             envs[i].play()
             #print(envs[i].fitness_single())

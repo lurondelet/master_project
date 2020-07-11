@@ -15,15 +15,17 @@ class player_controller(Controller):
     # crossover : tree1, tree2, node1, node2.
     # mutation with random element.
     # reproduction: taking the X tree  and copy paste.
-    def refresh_input(self):
-        return 1
+
+
+
     def control(self,  inputs, Controller):
 
         #print(self.agent.fitness)
         left,  right, jump, shoot, release = 0, 0, 0, 0, 0
         keys = [left, right, jump, shoot, release]
         for i in range(len(self.agent.trees)):
-            print(pars_tree(self.agent.trees[i]))
+            # print(pars_tree(self.agent.trees[i]))
+            refresh_inputs(self.agent.trees[i], inputs)
             if pars_tree(self.agent.trees[i]):
                 keys[i] = 1
             else:
@@ -41,14 +43,33 @@ class enemy_controller(Controller):
         attack1, attack2, attack3, attack4 = 0, 0, 0, 0
         keys = [attack1, attack2, attack3, attack4]
         for i in range(len(self.agent)):
+            refresh_inputs(self.agent.trees[i], inputs)
             if pars_tree(self.agent.trees[i]):
                 keys[i] = 1
             else:
                 keys[i] = 0
         return keys
 
+def print_tree(node ,i = 0):
+    # print('node data is ', node.data)
+    array_lvl2 = []
+    array=[node.data]
+    print(i*'    ', 'LVL ', i)
+    print(i * '    ', array)
+    if node.leftchild is not None :
+        array_lvl2 += [print_tree(node.leftchild, i+1)]
+    if node.rightchild is not None :
+        array_lvl2 += [print_tree(node.rightchild, i+1)]
+    array += array_lvl2
 
-
+def refresh_inputs(node, inputs):
+    # print_tree(node)
+    if (node.leftchild == None or node.rightchild == None) :
+        if 1 < node.data < 20:
+            node.data = inputs[node.data]
+    else:
+        refresh_inputs(node.leftchild,inputs)
+        refresh_inputs(node.rightchild,inputs)
 ##mathematical expression operator < > <
 
 ##boolean expression
