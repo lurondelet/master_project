@@ -7,10 +7,11 @@ import copy
 import numpy as np
 from GP_controller import player_controller
 
-experiment_name = 'GP_agent_demo'
+experiment_name = 'GP_agent_test'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
+sys.path.append(experiment_name)
 
 class Node:
     def __init__(self, data):
@@ -168,7 +169,10 @@ population = Population()
 envs=[]
 #for each agent an environment needs to be created to run an instance of the game
 for i in range(population.pop_number):
-    env = Environment(experiment_name=experiment_name,
+    if not os.path.exists(experiment_name+'/'+str(i)):
+        os.makedirs(experiment_name+'/'+str(i))
+
+    env = Environment(experiment_name=experiment_name+'/'+str(i),
                       #playermode="ai",
                       player_controller=player_controller(population.agents[i]),
                       speed="fastest",
@@ -189,7 +193,7 @@ for g in range(1,population.gen_number):
             #print(pars_tree(population.agents[i].trees[1]))
             envs[i].play()
             #print(envs[i].fitness_single())
-            population.agents[i].fitness=envs[i].fitness_single()
+            population.agents[i].fitness=envs[i].fitness_single()/8
             # print('\n saved ' + str(en) + ' \n')
     #population.gen_number += 1
     #new gen : calculate champion, reset fitness, reproduce with mutation and crossover
