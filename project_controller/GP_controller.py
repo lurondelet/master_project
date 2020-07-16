@@ -31,7 +31,7 @@ class player_controller(Controller):
             else:
                 keys[i] = 0
 
-        print([left, right, jump, shoot, release])
+        # print([left, right, jump, shoot, release])
         return keys
 
 
@@ -68,8 +68,8 @@ def refresh_inputs(node, inputs):
         if 1 < node.data < 20:
             node.data = inputs[node.data]
     else:
-        refresh_inputs(node.leftchild,inputs)
-        refresh_inputs(node.rightchild,inputs)
+        refresh_inputs(node.leftchild, inputs)
+        refresh_inputs(node.rightchild, inputs)
 ##mathematical expression operator < > <
 
 ##boolean expression

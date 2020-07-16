@@ -1,7 +1,8 @@
 import sys, os
+
 sys.path.insert(0, 'evoman')
 from environment import Environment
-from  random import choice,randrange,random
+from random import choice, randrange, random
 import copy
 # imports other libs
 import numpy as np
@@ -12,6 +13,9 @@ if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
 sys.path.append(experiment_name)
+
+
+# ##------------------------------------------------------- class starts
 
 class Node:
     def __init__(self, data):
@@ -42,17 +46,19 @@ class Node:
         self.leftchild = node2.leftchild
         self.rightchild = node2.rightchild
 
-def print_tree(node ,i = 0):
+
+def print_tree(node, i=0):
     # print('node data is ', node.data)
     array_lvl2 = []
-    array=[node.data]
-    print(i*'    ', 'LVL ', i)
+    array = [node.data]
+    print(i * '    ', 'LVL ', i)
     print(i * '    ', array)
-    if node.leftchild is not None :
-        array_lvl2 += [print_tree(node.leftchild , i+1)]
-    if node.rightchild is not None :
-        array_lvl2 += [print_tree(node.rightchild , i+1)]
+    if node.leftchild is not None:
+        array_lvl2 += [print_tree(node.leftchild, i + 1)]
+    if node.rightchild is not None:
+        array_lvl2 += [print_tree(node.rightchild, i + 1)]
     array += array_lvl2
+
 
 def copytree(tree):
     newtree = Node()
@@ -63,72 +69,88 @@ def copytree(tree):
         newtree.leftchild = copytree(tree.lefthchild)
     return newtree
 
-def generate_random_tree(depth,operator='math',proba=25):
-    #node pool
-    #the first set of operators "bool" requires to take the inputs as logical condition : ex if input is triggered (input !=0) then do X
-    if operator=="bool":
+
+def generate_random_tree(depth, operator='math', proba=25):
+    # node pool
+    # the first set of operators "bool" requires to take the inputs as logical condition :
+    # ex if input is triggered (input !=0) then do X
+    if operator == "bool":
         and_node = Node('&&')
         or_node = Node('||')
         xor_node = Node('^')
         nodes = [and_node, or_node, xor_node]
-    #the inputs are in form of integer which means that they can be compared to each other and to numerical number
-    #with math operator we can check inputs value by comparing them to number or each other.
-    else :
+    # the inputs are in form of integer which means that they can be compared to each other and to numerical number
+    # with math operator we can check inputs value by comparing them to number or each other.
+    else:
         sup_node = Node('>')
         inf_node = Node('<')
         infeq_node = Node('<=')
         supeq_node = Node('>=')
-        eq_node = Node ('=')
+        eq_node = Node('=')
         dif_node = Node('!=')
-        #tresh1_node = Node('sigma')
-        nodes = [sup_node,inf_node,infeq_node,supeq_node,eq_node,dif_node]#,tresh1_node]
-        numerical_nodes = [-100,-50,0,50,100]
-    inputs =[i for i in range(1,21)]
-    #add the input as ints which will serve as index to take from the real inputs array taken from the sensors.
+        # tresh1_node = Node('sigma')
+        nodes = [sup_node, inf_node, infeq_node, supeq_node, eq_node, dif_node]  # ,tresh1_node]
+        numerical_nodes = [-100, -50, 0, 50, 100]
+    inputs = [i for i in range(1, 21)]
+    # add the input as ints which will serve as index to take from the real inputs array taken from the sensors.
     node2copy = choice(nodes)
     parent_node = copy.deepcopy(node2copy)
-    p1,p2=randrange(0,100),randrange(0,100)
-    #probability to have arbitrary number comparaison in the tree
-    if depth-1==0:
+    p1, p2 = randrange(0, 100), randrange(0, 100)
+    # probability to have arbitrary number comparaison in the tree
+    if depth - 1 == 0:
         if p1 > proba:
             parent_node.leftchild = Node(choice(inputs))
-        else :
+        else:
             parent_node.leftchild = Node(choice(numerical_nodes))
         if p2 > proba:
             parent_node.rightchild = Node(choice(numerical_nodes))
-        else :
+        else:
             parent_node.rightchild = Node(choice(inputs))
     else:
         parent_node.rightchild = generate_random_tree(depth - 1)
         parent_node.leftchild = generate_random_tree(depth - 1)
     return parent_node
 
-def generation(population):
-    newgeneration= Population(population)
-    return newgeneration
 
 class Agent(Node):
-    def __init__(self,playerorenemy,fitness=0):
-        if playerorenemy == True:
-            self.trees = [generate_random_tree(4),
-                   generate_random_tree(4),
-                   generate_random_tree(4),
-                   generate_random_tree(4),
-                   generate_random_tree(4)]
+    def __init__(self, playerorenemy, fitness=0):
+        if playerorenemy:
+            self.trees = np.array([generate_random_tree(4),
+                                   generate_random_tree(4),
+                                   generate_random_tree(4),
+                                   generate_random_tree(4),
+                                   generate_random_tree(4)])
         else:
-            self.trees=[generate_random_tree(4),
-                   generate_random_tree(4),
-                   generate_random_tree(4),
-                   generate_random_tree(4)]
-        self.fitness=fitness
+            self.trees = np.array([generate_random_tree(4),
+                                   generate_random_tree(4),
+                                   generate_random_tree(4),
+                                   generate_random_tree(4)])
+        self.fitness = fitness
 
     def toArray(self):
-        return np.array([self.trees,self.fitness])
+        return np.array([self.trees, self.fitness])
 
     def get_fitness(self):
         return self.fitness
-    def set_fitness(self,new_fitness):
-        self.fitness=new_fitness
+
+    def set_fitness(self, new_fitness):
+        self.fitness = new_fitness
+
+    def mutate(self):
+        for i in range(len(self.trees)):
+            self.trees[i].mutation()
+
+    def rdm_crossover(self):
+        rng = randrange(0, len(self.trees))
+        for i in self.trees:
+            self.trees[i].crossove(self.trees[rng])
+
+    def __lt__(self, agent):
+        return self.fitness < agent.fitness
+
+    def __neg__(self):
+        self.fitness *= -1
+
 
 class Population:
     def __init__(self,
@@ -138,45 +160,155 @@ class Population:
                  gen_number=2,
                  max_depth=1000,
                  max_split=500
-                 #,pop=[]
+                 # ,pop=[]
                  ):
-        #number of entity in the pop
+        # number of entity in the pop
         self.pop_number = pop_number
-        #number of surviving entity each epoch
+        # number of surviving entity each epoch
         self.survivor = survivor
-        #boolean to change how th tree is parsed/treated
+        # boolean to change how th tree is parsed/treated
         self.player = player
-        #generation number to look how time the algorithm ran
+        # generation number to look how time the algorithm ran
         self.gen_number = gen_number
-        #max depth and max width of the tree to stop it from going overboar
+        # max depth and max width of the tree to stop it from going overboar
         self.max_depth = max_depth
         self.max_split = max_split
-        #array stocking the agents trees
-        self.agents=np.array([])
+        # array stocking the agents trees
+        self.agents = np.array([])
         for i in range(pop_number):
             newagent = Agent(playerorenemy=self.player)
             # self.agents = self.agents.append(newagent.toArray())
             # self.agents = self.agents.append(newagent)
             self.agents = np.append(self.agents, newagent)
-    #
+
+    def agenttoarray(self):
+        for i in range(len(self.agents)):
+            self.agents[i] = self.agents[i].toArray()
+
+    def __neg__(self):
+        for i in range(len(self.agents)):
+            self.agents[i] *= -1
+
+    # sort function on agents.----------------
     # def champion(self):
-    #     self.agents *= -1
-    #     self.agents = -self.agents[self.agents[:, 1].argsort()]
-    #     return(self.agents[:self.pop_number//self.survivor])
+    # print("OBJECT FORM",self.agents[0].fitness)
+    # self.agenttoarray()
+    # print("ARRAY FORM", self.agents.ndim)
+    # # for i in self.agents:
+    # #     i.toArray()
+    # self.agents *= -1
+    # self.agents = -self.agents[self.agents[:, 1].argsort()]
+    # return self.agents[:self.pop_number//self.survivor]
+    def champion(self):
+        # fusion sort based on the second element of the agents object of the population
+        # for i in range (len(self.agents)):
+        #     print(self.agents[i].fitness)
+        print(self.agents)
+        # triFusion(self.agents)
+        -self.agents
+        self.agents.sort()
+        -self.agents
+        print(self.agents)
+        return 'done'
+
+    def new_generation(self, proba_mutation=10, proba_crossover=10):
+        # #fitness sort
+        # self.agenttoarray()
+        # # print(self.agents)
+        # self.agents *= -1
+        # self.agents = -self.agents[self.agents[:, 1].argsort()]
+        # self.agents[:self.pop_number//self.survivor]
+        # champions
+        self.champion()
+        loop_changed = self.pop_number // self.survivor
+        leftover = self.pop_number % self.survivor
+        print("loop changed", loop_changed, "           leftover", leftover)
+        new_generation = np.array(copy.deepcopy(self.agents[self.survivor:]))
+        print("new generation",new_generation)
+        if loop_changed >= 1:
+            for i in range(1, loop_changed):
+                survivor_copy = np.array(copy.deepcopy(self.agents[:self.survivor]))
+                print("survivor", survivor_copy)
+                new_generation = np.append(new_generation, survivor_copy)
+                print("IN LOOP                              ", new_generation)
+        if leftover > 0:
+            new_generation = np.append(new_generation, copy.deepcopy(self.agents[:leftover]))
+        rng = randrange(0, 100)
+        for i in range(self.pop_number - self.survivor):
+            if 0 < rng < proba_mutation:
+                new_generation[self.survivor + i].mutate()
+            elif proba_mutation <= rng < proba_crossover:
+                new_generation[self.survivor + i].rdm_crossover()
+        self.agents = new_generation
 
 
-population = Population()
-envs=[]
-#for each agent an environment needs to be created to run an instance of the game
+def triFusion(T):
+    # entrée ː un tableau T
+    # sortie ː une permutation triée de T
+    # fonction  triFusion(T[1, …, n])
+    # si  n ≤ 1
+    if len(T) <= 1:
+        #     renvoyer  T
+        return T
+    # sinon
+    else:
+        q = len(T) // 2
+        #     renvoyer  fusion(triFusion(T[1, …, n / 2]), triFusion(T[n / 2 + 1, …, n]))
+        return fuse(triFusion(T[:q]), triFusion(T[q:]))
+
+
+def fuse(A, B):
+    # entrée ː deux tableaux triés  A et  B
+    # sortie: un  tableau  trié   qui  contient exactement   les éléments  des  tableaux A    et   B
+    # fonction    fusion(A[1, …, a], B[1, …, b])
+    # si    A   est  le   tableau    vide
+    # print('LEN A', len(A), 'LEN B', len(B))
+    if len(A) == 0:
+        #     renvoyer     B
+        return B
+    # si B est le tableau vide
+    if len(B) == 0:
+        #     renvoyer A
+        return A
+    # si A[1] ≤ B[1]
+    print("ITERATION ---------------------------------")
+
+    print("len A =", len(A))
+    print("A =", A)
+    print("len B  =", len(B))
+    print("B =", B)
+    print("A0 =", A[0])
+    print("B0 =", B[0])
+    if A[0].fitness <= B[0].fitness:
+        print('LEN A[:1]', len(A[1:]), 'LEN B', len(B))
+        #     renvoyer    A[1] ⊕ fusion(A[2, …, a], B)
+        return [A[0]] + fuse(A[1:], B)
+    # sinon
+    else:
+        #     renvoyer B[1] ⊕ fusion(A, B[2, …, b])
+        print('LEN A[:1]', len(A), 'LEN B', len(B[1:]))
+        return [B[0]] + fuse(A, B[1:])
+
+
+# ------------------------------------------------------#
+
+
+# ##---------------------------------------------------------program
+population = Population(
+    pop_number=2,
+    survivor=1,
+    gen_number=2)
+envs = []
+# for each agent an environment needs to be created to run an instance of the game
 for i in range(population.pop_number):
-    if not os.path.exists(experiment_name+'/'+str(i)):
-        os.makedirs(experiment_name+'/'+str(i))
+    if not os.path.exists(experiment_name + '/' + str(i)):
+        os.makedirs(experiment_name + '/' + str(i))
 
-    env = Environment(experiment_name=experiment_name+'/'+str(i),
-                      #playermode="ai",
+    env = Environment(experiment_name=experiment_name + '/' + str(i),
+                      # playermode="ai",
                       player_controller=player_controller(population.agents[i]),
                       speed="fastest",
-                    # multiplemode="yes",
+                      # multiplemode="yes",
                       enemymode="static",
                       # inputcoded="yes"
                       level=2
@@ -184,21 +316,27 @@ for i in range(population.pop_number):
     envs.append(env)
 
 # loop to fight each enemies
-for g in range(1,population.gen_number):
-    for en in range(1, 9):
+for g in range(0, population.gen_number):
+    for en in range(1, 3):
         # loop on the whole population
         for i in range(population.pop_number):
             envs[i].update_parameter('enemies', [en])
-            #print_tree(population.agents[i].trees[0])
-            #print(pars_tree(population.agents[i].trees[1]))
+            # print_tree(population.agents[i].trees[0])
+            # print(pars_tree(population.agents[i].trees[1]))
             envs[i].play()
-            #print(envs[i].fitness_single())
-            population.agents[i].fitness=envs[i].fitness_single()/8
+            # print(len(population.agents))
+            # print(i,"       ",population.agents[i].fitness)
+            population.agents[i].fitness += envs[i].fitness_single() / 8
+    population.new_generation()
+    print_tree(population.agents[0].trees[0])
             # print('\n saved ' + str(en) + ' \n')
-    #population.gen_number += 1
-    #new gen : calculate champion, reset fitness, reproduce with mutation and crossover
+        # print('BEFORE TRI')
+        # # population.champion()
+        # # triFusion(population.agents)
+        # print('AFTER TRI')
+        # population.champion()
+    # population.gen_number += 1
+    # population.new_generation()
+    # new gen : calculate champion, reset fitness, reproduce with mutation and crossover
 
-
-
-
-
+# starts------------------------------------------------------
