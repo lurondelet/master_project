@@ -6,9 +6,9 @@ from random import choice, randrange, random
 import copy
 # imports other libs
 import numpy as np
-from GP_controller import player_controller
+from GP_controller import player_controller, enemy_controller
 
-experiment_name = 'GP_agent_test'
+experiment_name = 'GP_agent2_test'
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
@@ -33,12 +33,12 @@ class Node:
             self.rightchild.print_tree()
 
     def mutation(self):
-        rng = random.random()
+        rng = random()
         inputs = [i for i in range(1, 21)]
-        if rng < 0.9:
+        if rng < 0.5:
             node = generate_random_tree(2)
-        elif 0.8 < rng <= 0.9:
-            node = random.choics(inputs)
+        else:
+            node = choice(inputs)
 
     def crossover(self, node):
         node2 = copy.deepcopy(node)
@@ -203,12 +203,12 @@ class Population:
         # fusion sort based on the second element of the agents object of the population
         # for i in range (len(self.agents)):
         #     print(self.agents[i].fitness)
-        print(self.agents)
+        # print(self.agents)
         # triFusion(self.agents)
         -self.agents
         self.agents.sort()
         -self.agents
-        print(self.agents)
+        # print(self.agents)
         return 'done'
 
     def new_generation(self, proba_mutation=10, proba_crossover=10):
@@ -222,23 +222,32 @@ class Population:
         self.champion()
         loop_changed = self.pop_number // self.survivor
         leftover = self.pop_number % self.survivor
-        print("loop changed", loop_changed, "           leftover", leftover)
-        new_generation = np.array(copy.deepcopy(self.agents[self.survivor:]))
-        print("new generation",new_generation)
+        # print("loop changed", loop_changed, "           leftover", leftover)
+        new_generation = np.array([])
+        # print("new generation",new_generation)
+
         if loop_changed >= 1:
-            for i in range(1, loop_changed):
+            print(loop_changed)
+            for i in range(loop_changed):
+                # print("looped---------------------------------------------------------", loop_changed)
                 survivor_copy = np.array(copy.deepcopy(self.agents[:self.survivor]))
-                print("survivor", survivor_copy)
+                # print("survivor", survivor_copy)
                 new_generation = np.append(new_generation, survivor_copy)
-                print("IN LOOP                              ", new_generation)
+                # print("IN LOOP                              ", new_generation)
+
+        # print("NEW GENERATION in loop : ===========================",len(new_generation))
         if leftover > 0:
             new_generation = np.append(new_generation, copy.deepcopy(self.agents[:leftover]))
+            # print("leftoooooooooooooooooover--------------------------------------", leftover)
         rng = randrange(0, 100)
+
+        # print("NEW GENERATION b4mute : ===========================",len(new_generation))
         for i in range(self.pop_number - self.survivor):
             if 0 < rng < proba_mutation:
                 new_generation[self.survivor + i].mutate()
             elif proba_mutation <= rng < proba_crossover:
                 new_generation[self.survivor + i].rdm_crossover()
+        # print("NEW GENERATION : ===========================",len(new_generation))
         self.agents = new_generation
 
 
@@ -271,34 +280,45 @@ def fuse(A, B):
         #     renvoyer A
         return A
     # si A[1] ≤ B[1]
-    print("ITERATION ---------------------------------")
-
-    print("len A =", len(A))
-    print("A =", A)
-    print("len B  =", len(B))
-    print("B =", B)
-    print("A0 =", A[0])
-    print("B0 =", B[0])
+    # print("ITERATION ---------------------------------")
+    #
+    # print("len A =", len(A))
+    # print("A =", A)
+    # print("len B  =", len(B))
+    # print("B =", B)
+    # print("A0 =", A[0])
+    # print("B0 =", B[0])
     if A[0].fitness <= B[0].fitness:
-        print('LEN A[:1]', len(A[1:]), 'LEN B', len(B))
+        # print('LEN A[:1]', len(A[1:]), 'LEN B', len(B))
         #     renvoyer    A[1] ⊕ fusion(A[2, …, a], B)
         return [A[0]] + fuse(A[1:], B)
     # sinon
     else:
         #     renvoyer B[1] ⊕ fusion(A, B[2, …, b])
-        print('LEN A[:1]', len(A), 'LEN B', len(B[1:]))
+        # print('LEN A[:1]', len(A), 'LEN B', len(B[1:]))
         return [B[0]] + fuse(A, B[1:])
 
-
+def export_tree(node, expertience_name):
+    return True
 # ------------------------------------------------------#
 
 
 # ##---------------------------------------------------------program
+#param
+total_pop = 3
+generation = 10
+survivor = 2
+
 population = Population(
-    pop_number=2,
-    survivor=1,
-    gen_number=2)
+    pop_number=total_pop,
+    survivor=survivor,
+    gen_number=generation)
 envs = []
+enemy_pop = Population(
+    pop_number=total_pop,
+    survivor=survivor,
+    gen_number=generation,
+    player=False)
 # for each agent an environment needs to be created to run an instance of the game
 for i in range(population.pop_number):
     if not os.path.exists(experiment_name + '/' + str(i)):
@@ -309,7 +329,8 @@ for i in range(population.pop_number):
                       player_controller=player_controller(population.agents[i]),
                       speed="fastest",
                       # multiplemode="yes",
-                      enemymode="static",
+                      enemymode="ai",
+                      # enemy_controller=enemy_controller(enemy_pop.agents[i]),
                       # inputcoded="yes"
                       level=2
                       )
@@ -317,7 +338,7 @@ for i in range(population.pop_number):
 
 # loop to fight each enemies
 for g in range(0, population.gen_number):
-    for en in range(1, 3):
+    for en in range(1, 9):
         # loop on the whole population
         for i in range(population.pop_number):
             envs[i].update_parameter('enemies', [en])
@@ -327,8 +348,11 @@ for g in range(0, population.gen_number):
             # print(len(population.agents))
             # print(i,"       ",population.agents[i].fitness)
             population.agents[i].fitness += envs[i].fitness_single() / 8
+    # print("LEN AGENTS BEFORE NEW GEN",len(population.agents))
     population.new_generation()
+    # print("LEN AGENTS AFTER NEW GEN",len(population.agents))
     print_tree(population.agents[0].trees[0])
+    print("NEW GENERATION ",g* ' ',g)
             # print('\n saved ' + str(en) + ' \n')
         # print('BEFORE TRI')
         # # population.champion()
