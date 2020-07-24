@@ -1,10 +1,11 @@
 from controller import Controller
+import numpy as np
+import random as rdm
 
 class player_controller(Controller):
-    def __init__(self,nothing='nothing'):
+    def __init__(self, nothing='nothing'):
         self.nothing=nothing
     def control(self,inputs, controller):
-        #inputs = (inputs - min(inputs)) / float((max(inputs) - min(inputs)))
         #print(inputs)
         #for i in range(len(inputs)-1):
 
@@ -43,8 +44,8 @@ class player_controller(Controller):
                         left = 1
 
             #horizontal bullet
-            if inputs[5+i*2] != 0 :
-                if inputs[4+i*2]>0:
+            if inputs[5+i*2] != 0:
+                if inputs[4+i*2] > 0:
                     jump = 1
                     release = 0
                 else:
@@ -61,34 +62,30 @@ class player_controller(Controller):
         else:
             release = 0
 
+        # if inputs[1] == 0 and np.sign(inputs[2]) == -1*np.sign(inputs[0]):
+        #     shoot = 1
+        # else:
+        #     shoot = 0
         shoot = 1
-        print([left, right, jump, shoot, release])
+        # print([left, right, jump, shoot, release])
         return [left, right, jump, shoot, release]
 
 class enemy_controller(Controller):
 
-    def control(self,inputs,Controller):
-        #inputs = (inputs - min(inputs)) / float((max(inputs) - min(inputs)))
-        if inputs[0] >= 0:
-            attack1 = 1
-        else:
-            attack1 = 0
+    def __init__(self, enemy_number=1):
+        self.enemy_number
 
-        if inputs[0] < 0:
-            attack2 = 1
-        else:
-            attack2 = 0
+    def control(self, inputs, Controller):
 
-        if inputs[1] >= 0:
-            attack3 = 1
-        else:
-            attack3 = 0
+        #if the direction of the enemy is the facing toward the player then attack with a random attack
+        output = [0, 0, 0, 0]
+        if np.sign(inputs[2]) == np.sign(inputs[0]):
+            output[rdm.choice([output])] = 1
 
-        if inputs[1] < 0:
-            attack4 = 1
-        else:
-            attack4 = 0
-
-        return [attack1, attack2, attack3, attack4]
+        if self.enemy_number > 6:
+            output = [0, 0, 0, 0, 0, 0]
+            if np.sign(inputs[2]) == np.sign(inputs[0]):
+                output[rdm.choice([output])] = 1
+        return output
 
 #function for both

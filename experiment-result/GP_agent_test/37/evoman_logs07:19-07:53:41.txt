@@ -1,0 +1,643 @@
+
+
+MESSAGE: Pygame initialized for simulation.
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 92.58875562139872; player life: 94; enemy life: 0; time: 908
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 39.50693855665945; player life: 0; enemy life: 50.0; time: 243
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 20.74233241211736; player life: 0; enemy life: 70.0; time: 522
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 2.3267796129097222; player life: 6.400000000000233; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 3.692244721017886; player life: 16.000000000000227; enemy life: 90.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 21.515203066509343; player life: 0; enemy life: 70.0; time: 241
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 26.132244721017898; player life: 60.40000000000033; enemy life: 70.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 86.83586874329959; player life: 32.80000000000027; enemy life: 0; time: 629
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 93.38259702202552; player life: 100; enemy life: 0; time: 748
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 75.08920335595947; player life: 0; enemy life: 10.0; time: 369
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 22.25506787163675; player life: 0; enemy life: 70.0; time: 115
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 9.466779612909722; player life: 77.80000000000021; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 5.0722447210178885; player life: 29.80000000000026; enemy life: 90.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 11.022718658369254; player life: 0; enemy life: 80.0; time: 1072
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 27.09224472101789; player life: 70.00000000000028; enemy life: 70.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 91.57642065638157; player life: 75.40000000000023; enemy life: 0; time: 389
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 69.69224472101786; player life: 46; enemy life: 20.0; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 84.17020626248757; player life: 10; enemy life: 0; time: 925
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 22.25506787163675; player life: 0; enemy life: 70.0; time: 115
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 2.5574598335318015; player life: 0; enemy life: 90.0; time: 628
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 2.732244721017887; player life: 6.400000000000233; enemy life: 90.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: -6.336212639346384; player life: 13.600000000000229; enemy life: 100; time: 2200
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 45.99224472101788; player life: 79.0000000000002; enemy life: 50.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 94.13874178945527; player life: 96.40000000000003; enemy life: 0; time: 245
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 88.67497034215654; player life: 52; enemy life: 0; time: 682
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 39.35102576183879; player life: 0; enemy life: 50.0; time: 284
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 29.309157722581435; player life: 0; enemy life: 60.0; time: 805
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 5.386779612909726; player life: 37.00000000000028; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 12.812244721017887; player life: 17.20000000000023; enemy life: 80.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: -2.6762126393463754; player life: 50.20000000000031; enemy life: 100; time: 2200
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 63.75224472101789; player life: 76.60000000000022; enemy life: 30.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 89.09214143983826; player life: 53.80000000000032; enemy life: 0; time: 538
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 84.09224472101786; player life: 100; enemy life: 10.0; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 38.769518552421516; player life: 0; enemy life: 50.0; time: 508
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 29.43473502996464; player life: 0; enemy life: 60.0; time: 710
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 2.494215939871771; player life: 0; enemy life: 90.0; time: 669
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: -6.087755278982113; player life: 8.200000000000232; enemy life: 100; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 2.2437873606536156; player life: 9.400000000000231; enemy life: 90.0; time: 2200
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 35.3122447210179; player life: 62.20000000000034; enemy life: 60.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 93.98266573298147; player life: 95.20000000000005; enemy life: 0; time: 254
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 69.09224472101786; player life: 40; enemy life: 20.0; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 57.00603857269343; player life: 0; enemy life: 30.0; time: 401
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 4.375027186715729; player life: 0; enemy life: 90.0; time: 102
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 10.84677961290971; player life: 91.60000000000008; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 22.652244721017887; player life: 25.60000000000025; enemy life: 70.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 2.5816350640637884; player life: 0; enemy life: 90.0; time: 613
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 46.35224472101788; player life: 82.60000000000016; enemy life: 50.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 74.48380692395703; player life: 0; enemy life: 10.0; time: 676
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 61.292244721017866; player life: 52; enemy life: 30.0; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 29.45034925776619; player life: 0; enemy life: 60.0; time: 699
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 22.281501128704907; player life: 0; enemy life: 70.0; time: 112
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 1.7936227085277476; player life: 0; enemy life: 90.0; time: 1348
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 3.272244721017886; player life: 11.80000000000023; enemy life: 90.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 19.53491726360045; player life: 0; enemy life: 70.0; time: 1746
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 45.99224472101788; player life: 79.0000000000002; enemy life: 50.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 91.4384215803562; player life: 73.60000000000025; enemy life: 0; time: 373
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 38.49224472101786; player life: 94; enemy life: 60.0; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 39.3029065134946; player life: 0; enemy life: 50.0; time: 298
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 12.527729326328526; player life: 0; enemy life: 80.0; time: 238
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 10.786779612909708; player life: 91.00000000000009; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 3.932244721017886; player life: 18.400000000000233; enemy life: 90.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 1.463787360653602; player life: 91.60000000000008; enemy life: 100; time: 2200
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 38.31224472101787; player life: 92.20000000000007; enemy life: 60.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 94.08693855665945; player life: 95.80000000000004; enemy life: 0; time: 243
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 61.292244721017866; player life: 52; enemy life: 30.0; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 39.427845967822236; player life: 0; enemy life: 50.0; time: 263
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 20.10027689271513; player life: 0; enemy life: 70.0; time: 992
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 11.300499659838323; player life: 0; enemy life: 80.0; time: 812
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 5.25224472101789; player life: 31.600000000000264; enemy life: 90.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 12.250607014091747; player life: 0; enemy life: 80.0; time: 314
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 35.3722447210179; player life: 62.80000000000034; enemy life: 60.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 93.86661051127248; player life: 94.00000000000006; enemy life: 0; time: 253
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 93.27857429920935; player life: 100; enemy life: 0; time: 830
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 48.27968822339259; player life: 0; enemy life: 40.0; time: 305
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 11.584903040828404; player life: 0; enemy life: 80.0; time: 611
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 9.52677961290972; player life: 78.4000000000002; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 5.43224472101789; player life: 33.40000000000027; enemy life: 90.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 20.120644195539562; player life: 0; enemy life: 70.0; time: 972
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 33.152244721017894; player life: 40.600000000000286; enemy life: 60.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 92.17935834262663; player life: 80.20000000000019; enemy life: 0; time: 344
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 89.6955856450359; player life: 64; enemy life: 0; time: 816
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 56.28340522647902; player life: 0; enemy life: 30.0; time: 826
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 13.346039649842478; player life: 0; enemy life: 80.0; time: 105
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 9.286779612909722; player life: 76.00000000000023; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 4.832244721017888; player life: 27.400000000000254; enemy life: 90.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 3.5637873606536177; player life: 22.600000000000243; enemy life: 90.0; time: 2200
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 52.712244721017896; player life: 56.20000000000032; enemy life: 40.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 92.79457939139343; player life: 87.40000000000012; enemy life: 0; time: 382
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 2.4922447210178635; player life: 94; enemy life: 100; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 47.32417677836515; player life: 0; enemy life: 40.0; time: 793
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 13.124802676798849; player life: 0; enemy life: 80.0; time: 131
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 8.086779612909734; player life: 64.00000000000034; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 5.612244721017891; player life: 35.20000000000027; enemy life: 90.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 2.862272945913766; player life: 0; enemy life: 90.0; time: 463
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 44.73224472101789; player life: 66.40000000000032; enemy life: 50.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 85.44166171665523; player life: 19.000000000000234; enemy life: 0; time: 638
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 3.092244721017863; player life: 100; enemy life: 100; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 21.454822555520437; player life: 0; enemy life: 70.0; time: 256
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 31.292244721017866; player life: 22; enemy life: 60.0; time: 1000
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 2.706580721153519; player life: 0; enemy life: 90.0; time: 541
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 13.112244721017888; player life: 20.200000000000237; enemy life: 80.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 2.4237873606536153; player life: 11.20000000000023; enemy life: 90.0; time: 2200
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 44.072244721017896; player life: 59.80000000000033; enemy life: 50.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 94.16353644806848; player life: 96.40000000000003; enemy life: 0; time: 239
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 88.44772962385827; player life: 52; enemy life: 0; time: 856
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 84.91778108962356; player life: 10; enemy life: 0; time: 438
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 29.755833099336265; player life: 0; enemy life: 60.0; time: 515
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 3.420270174013778; player life: 0; enemy life: 90.0; time: 265
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 3.4522447210178857; player life: 13.600000000000229; enemy life: 90.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: -2.1362126393463745; player life: 55.60000000000032; enemy life: 100; time: 2200
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 44.01224472101789; player life: 59.20000000000033; enemy life: 50.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 93.69794861721984; player life: 94.60000000000005; enemy life: 0; time: 318
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 78.69224472101786; player life: 46; enemy life: 10.0; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 48.31302464366018; player life: 0; enemy life: 40.0; time: 295
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 20.44749211296541; player life: 0; enemy life: 70.0; time: 701
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 7.786779612909732; player life: 61.000000000000334; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 20.225776113642386; player life: 0; enemy life: 70.0; time: 875
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 11.633529552268563; player life: 0; enemy life: 80.0; time: 582
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 27.632244721017884; player life: 75.40000000000023; enemy life: 70.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 92.34920335595949; player life: 82.60000000000016; enemy life: 0; time: 369
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 3.092244721017863; player life: 100; enemy life: 100; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 90.8882651908471; player life: 72; enemy life: 0; time: 551
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 13.346039649842478; player life: 0; enemy life: 80.0; time: 105
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 10.126779612909715; player life: 84.40000000000015; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: -6.147755278982114; player life: 7.600000000000232; enemy life: 100; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 12.250607014091747; player life: 0; enemy life: 80.0; time: 314
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 45.27224472101789; player life: 71.80000000000027; enemy life: 50.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 94.00657125383503; player life: 95.20000000000005; enemy life: 0; time: 248
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 2.4922447210178635; player life: 94; enemy life: 100; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 74.28582947009053; player life: 0; enemy life: 10.0; time: 824
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 24.092244721017863; player life: 40; enemy life: 70.0; time: 1000
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 11.266779612909705; player life: 95.80000000000004; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 11.792244721017887; player life: 7.000000000000233; enemy life: 80.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 11.9669137782012; player life: 0; enemy life: 80.0; time: 417
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 44.792244721017894; player life: 67.00000000000031; enemy life: 50.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 92.93788162462295; player life: 87.40000000000012; enemy life: 0; time: 331
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 89.33230127389564; player life: 58; enemy life: 0; time: 644
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 30.00603857269343; player life: 0; enemy life: 60.0; time: 401
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 29.106343645397367; player life: 0; enemy life: 60.0; time: 986
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 1.7151790874313964; player life: 0; enemy life: 90.0; time: 1458
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: -5.6677552789821135; player life: 12.40000000000023; enemy life: 100; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 20.48378736065362; player life: 11.80000000000023; enemy life: 70.0; time: 2200
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 62.5522447210179; player life: 64.60000000000034; enemy life: 30.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 92.35550058692485; player life: 84.40000000000015; enemy life: 0; time: 439
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 88.38875562139872; player life: 52; enemy life: 0; time: 908
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 56.68826519084708; player life: 0; enemy life: 30.0; time: 551
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 4.187815644627583; player life: 0; enemy life: 90.0; time: 123
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 8.866779612909728; player life: 71.80000000000027; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: -3.9277552789821106; player life: 29.80000000000026; enemy life: 100; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 0.44378736065361135; player life: 81.40000000000018; enemy life: 100; time: 2200
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 51.45224472101789; player life: 43.60000000000029; enemy life: 40.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 92.41641489804763; player life: 81.40000000000018; enemy life: 0; time: 306
+
+PARAMETER CHANGE: enemies = [1]
+
+RUN: run status: enemy: 1; fitness: 3.092244721017863; player life: 100; enemy life: 100; time: 1000
+
+PARAMETER CHANGE: enemies = [2]
+
+RUN: run status: enemy: 2; fitness: 48.56627799644576; player life: 0; enemy life: 40.0; time: 229
+
+PARAMETER CHANGE: enemies = [3]
+
+RUN: run status: enemy: 3; fitness: 21.606372453647637; player life: 0; enemy life: 70.0; time: 220
+
+PARAMETER CHANGE: enemies = [4]
+
+RUN: run status: enemy: 4; fitness: 1.7867796129097213; player life: 1.000000000000234; enemy life: 90.0; time: 1500
+
+PARAMETER CHANGE: enemies = [5]
+
+RUN: run status: enemy: 5; fitness: 21.812244721017887; player life: 17.20000000000023; enemy life: 70.0; time: 1000
+
+PARAMETER CHANGE: enemies = [6]
+
+RUN: run status: enemy: 6; fitness: 1.2837873606536023; player life: 89.8000000000001; enemy life: 100; time: 2200
+
+PARAMETER CHANGE: enemies = [7]
+
+RUN: run status: enemy: 7; fitness: 44.3722447210179; player life: 62.80000000000034; enemy life: 50.0; time: 1000
+
+PARAMETER CHANGE: enemies = [8]
+
+RUN: run status: enemy: 8; fitness: 84.45995543807338; player life: 9.400000000000231; enemy life: 0; time: 652

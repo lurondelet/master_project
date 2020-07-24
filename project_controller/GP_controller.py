@@ -70,58 +70,48 @@ def refresh_inputs(node, inputs):
     else:
         refresh_inputs(node.leftchild, inputs)
         refresh_inputs(node.rightchild, inputs)
-##mathematical expression operator < > <
+
+
 
 ##boolean expression
-
 def pars_tree_bool(node):
+    #recursion end condition
     if node.leftchild == None or node.rightchild == None:
         return node.data
     else:
+        #and node
         if node.data == "&&":
             return pars_tree_bool(node.leftchild) and pars_tree_bool(node.rightchild)
+        #or node
         if node.data == "||":
             return pars_tree_bool(node.leftchild) or pars_tree_bool(node.rightchild)
+        #Xor node
         if node.data == "^":
             return pars_tree_bool(node.leftchild) ^ pars_tree_bool(node.rightchild)
+        #right to left implication
+        if node.data == "=>":
+            return not pars_tree_bool(node.leftchild) or pars_tree_bool(node.rightchild)
+        #left to right implication
+        if node.data == "<=":
+            return pars_tree_bool(node.leftchild) or not pars_tree_bool(node.rightchild)
+        #equivalence
+        if node.data == "<=>":
+            return (not pars_tree_bool(node.leftchild) or pars_tree_bool(node.rightchild)) and (pars_tree_bool(node.leftchild) or not pars_tree_bool(node.rightchild))
 
-
+##mathematical expression operator < > <  = !=
 def pars_tree(node):
     if node.leftchild is None or node.rightchild is None:
-        # print(type(node.data)is None)
-        # print('data is',node.data)
         return node.data
     else:
-        # print('----------NEW ETAPE----------')
-        # print(node.leftchild.data, ',', node.data, ',', node.rightchild.data)
-        # # print(type(node.leftchild.data), ',', type(node.data), ',', type(node.rightchild.data))
-        # print('PARAMETRE DE BASE')
-        # print(node.data)
-        # print(node.leftchild.data)
-        # print(node.rightchild.data)
-        # print(node.leftchild.data, '(', type(node.leftchild.data), ')', ',', node.data, ',', node.rightchild.data, '(', type(node.rightchild.data), ')')
-        # print(type(node.leftchild.data),type(node.rightchild.data))
         if node.data == '<':
-            # print('leftchild : \'',node.leftchild.data,'\' INFERIOR ,rightchild : \'',node.rightchild.data,'\'' )
-            # node.data = pars_tree(node.leftchild) < pars_tree_bool(node.rightchild)
             return pars_tree(node.leftchild) < pars_tree(node.rightchild)
         if node.data == '>':
-            # print('leftchild : \'',node.leftchild.data,'\' SUPERIOR rightchild : \'',node.rightchild.data,'\'' )
-            # node.data=pars_tree(node.leftchild) > pars_tree_bool(node.rightchild)
             return pars_tree(node.leftchild) > pars_tree(node.rightchild)
         if node.data == '<=':
-            # print('leftchild : \'',node.leftchild.data,'\' INF,EQUAL rightchild : \'',node.rightchild.data,'\'' )
-            # node.data=pars_tree(node.leftchild) <= pars_tree_bool(node.rightchild)
             return pars_tree(node.leftchild) <= pars_tree(node.rightchild)
         if node.data == '>=':
-            # print('leftchild : \'',node.leftchild.data,'\' SUP,EQUAL rightchild : \'',node.rightchild.data,'\'' )
-            # node.data=pars_tree(node.leftchild) >= pars_tree_bool(node.rightchild)
             return pars_tree(node.leftchild) >= pars_tree(node.rightchild)
         if node.data == '=':
-            # print('leftchild : \'',node.leftchild.data,'\' EQUAL rightchild : \'',node.rightchild.data,'\'' )
-            # node.data=pars_tree(node.leftchild) == pars_tree_bool(node.rightchild)
             return pars_tree(node.leftchild) == pars_tree(node.rightchild)
         if node.data == '!=':
-            # print('leftchild : \'',node.leftchild.data,'\' INEQUAL rightchild : \'',node.rightchild.data ,'\'')
-            # node.data=pars_tree(node.leftchild) != pars_tree_bool(node.rightchild)
             return pars_tree(node.leftchild) != pars_tree(node.rightchild)
