@@ -4,6 +4,7 @@ from  random import *
 import numpy as np
 import copy
 
+from GP_class import *
 #from evoman_framework.GP_player import print_tree
 
 
@@ -25,11 +26,12 @@ class player_controller(Controller):
         keys = [left, right, jump, shoot, release]
         for i in range(len(self.agent.trees)):
             refresh_inputs(self.agent.trees[i], inputs)
-            if pars_tree(self.agent.trees[i]):
+            bool =pars_tree(self.agent.trees[i])
+            if bool:
                 keys[i] = 1
             else:
                 keys[i] = 0
-
+        # print(bool)
         # print([left, right, jump, shoot, release])
         return keys
 
@@ -61,6 +63,8 @@ def print_tree(node ,i = 0):
         array_lvl2 += [print_tree(node.rightchild, i+1)]
     array += array_lvl2
 
+
+
 def refresh_inputs(node, inputs):
     # print_tree(node)
     if (node.leftchild == None and node.rightchild == None) :
@@ -75,9 +79,16 @@ def refresh_inputs(node, inputs):
 
 ##mathematical expression operator < > <  = != + logical
 def pars_tree(node):
-    if node.leftchild is None or node.rightchild is None:
+    if node.leftchild is not None and node.rightchild is None:
+        node.rightchild = Node(20)
+    if node.leftchild is None and node.rightchild is not None:
+        node.leftchild = Node(20)
+
+    if node.leftchild is None and node.rightchild is None:
         return node.data
     else:
+        # print('------------------------------------------------i --------------------------')
+        # print_tree(node)
         #inf node
         if node.data == '<':
             return pars_tree(node.leftchild) < pars_tree(node.rightchild)
@@ -89,6 +100,9 @@ def pars_tree(node):
             return pars_tree(node.leftchild) <= pars_tree(node.rightchild)
         #sup or equal node
         if node.data == '>=':
+            # print_tree(node)
+            # print('node lc--------------',node.leftchild,':',node.leftchild.data)
+            # print('node rc--------------',node.rightchild,":",node.rightchild.data)
             return pars_tree(node.leftchild) >= pars_tree(node.rightchild)
         #equal node
         if node.data == '=':
@@ -114,4 +128,3 @@ def pars_tree(node):
         #equivalence
         if node.data == "<=>":
             return (not pars_tree(node.leftchild) or pars_tree(node.rightchild)) and (pars_tree(node.leftchild) or not pars_tree(node.rightchild))
-
