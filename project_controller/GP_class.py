@@ -122,6 +122,10 @@ class Population:
         for i in range(len(self.agents)):
             self.agents[i] *= -1
 
+    def __add__(self, pop):
+        self.agents=np.append(self.agents,pop.agents)
+        self.pop_number+=pop.pop_number
+
     # sort function on agents.----------------
     # def champion(self):
     # print("OBJECT FORM",self.agents[0].fitness)
@@ -218,7 +222,7 @@ def mutation(node):
 
 def add_sub_tree_leaf(node,subtree):
     rng = randrange(2)
-    print_tree(node)
+    # print_tree(node)
     if node.leftchild is not None and rng:
         add_sub_tree_leaf(node.leftchild, subtree)
     if node.rightchild is not None and not rng:

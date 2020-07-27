@@ -52,6 +52,8 @@ def load_population(experiment_name,enemy=False,display=False):
         file = gzip.open(experiment_name + '/GP_solution' )
     pop = pickle.load(file, encoding='latin1')
     if display:
+        print('pop_number--------------------',pop.pop_number)
+        print('survivor-----------',pop.survivor)
         print_pop(pop)
     return pop
 
@@ -70,8 +72,8 @@ def save_build_static(experiment_name,env,population):
 def load_build(experiment_name):
     population = load_population(experiment_name)
     enemy_pop = load_population(experiment_name, True)
-    envs = generate_envs(population, experiment_name)
-    return [population, enemy_pop, envs]
+    # envs = generate_envs(population, experiment_name)
+    return [population, enemy_pop]#, envs]
 
 def generate_envs(population,experiment_name):
     envs = []
@@ -180,30 +182,52 @@ def new_run_static(experiment_name,total_pop,generation,survivor):
     run_experiment(population, envs, experiment_name)
 
 def run_build(experiment_name):
-    [population, enemy_pop, envs] = load_build(experiment_name)
+    [population, enemy_pop] = load_build(experiment_name)
+    envs=generate_envs_with_enemy(population,enemy_pop,experiment_name)
     # print_pop(population)
     run_experiment(population, enemy_pop, envs, experiment_name)
 
 def print_pop(population):
-    for i in range(len(population.agents)):
+    for i in range(population.survivor):
         for j in range(len(population.agents[0].trees)):
             print_tree(population.agents[i].trees[j])
             print("---------------------------------------",i,"-----------------------")
 
-def run_best(experiment_name):
-    [population, enemy_pop, envs] = load_build(experiment_name)
-    new_pop= Population(
+def run_best(experiment_name,new_name):
+    [population, enemy_pop] = load_build(experiment_name)
+    new_pop = Population(
         pop_number=population.survivor,
         survivor=1,
         gen_number=2)
-    new_pop.agents=np.array(copy.deepcopy(population.agents[:population.survivor]))
-    new_envs=generate_envs(new_pop,'gpXY')
-    for en in range(1, 9):
-        for i in range(new_pop.pop_number):
-            # new_envs[i].update_parameter('enemymode','static')
+    new_pop.agents = np.array(copy.deepcopy(population.agents[:population.survivor]))
+    new_envs = []
+    for i in range(new_pop.pop_number):
+
+        if not os.path.exists(new_name + '/' + str(i)):
+            os.makedirs(new_name + '/' + str(i))
+
+        env = Environment(experiment_name=new_name+'/' + str(i),
+                          playermode="ai",
+                          player_controller=player_controller(new_pop.agents[i]),
+                          speed="fastest",
+                          level=2
+                          )
+        new_envs.append(env)
+    print_pop(new_pop)
+    for i in range(new_pop.pop_number):
+        for en in range(1, 9):
             new_envs[i].update_parameter('enemies', [en])
             new_envs[i].play()
 
+def merge_experience(experiences_name,experiment_name):
+    pop = Population(
+        pop_number=1,
+        survivor=10,
+        gen_number=10)
+    for i in range(len(experiences_name)):
+        pop+load_population(experiences_name[i])
+    envs=generate_envs(pop,experiment_name)
+    run_experiment_static(pop,envs,experiment_name)
 
 def correct_tree(node):
     if node.leftchild is not None and node.rightchild is None:
@@ -247,7 +271,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("function",
                     nargs="?",
-                    choices=['new_run',"new_run_static", 'run_build', 'run_best'],
+                    choices=['new_run',"new_run_static", 'run_build', 'run_best','load_pop'],
                     default='new_run',
                     )
 args, sub_args = parser.parse_known_args()
@@ -269,9 +293,10 @@ elif args.function == "run_build":
 
 elif args.function == "run_best":
     parser = argparse.ArgumentParser()
-    parser.add_argument('name', type=str, help='name of the experience')
+    parser.add_argument('name', type=str, help='name of the experience to run')
+    parser.add_argument('nUname', type=str, help='name of the folder where the best will be saved')
     args = parser.parse_args(sub_args)
-    run_best(args.name)
+    run_best(args.name,args.nUname)
 
 elif args.function == "new_run_static":
     parser = argparse.ArgumentParser()
@@ -281,3 +306,17 @@ elif args.function == "new_run_static":
     parser.add_argument('s', type=int, default=5, help='number of surviving agent')
     args = parser.parse_args(sub_args)
     new_run_static(args.name, args.tp, args.gen,args.s)
+
+elif args.function == "new_run_static":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('merge', type=list, help='name of the experiences in [x,a,b] form')
+    parser.add_argument('name', type=str, help='name of the experience')
+    args = parser.parse_args(sub_args)
+    new_run_static( args.merge ,args.name)
+
+elif args.function == "load_pop":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('name', type=str, help='name of the experience')
+    parser.add_argument('display', type=bool, help='show the tree of a given pop')
+    args = parser.parse_args(sub_args)
+    load_population( args.name,False,args.display)

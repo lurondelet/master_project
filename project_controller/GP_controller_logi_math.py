@@ -24,9 +24,11 @@ class player_controller(Controller):
         #print(self.agent.fitness)
         left,  right, jump, shoot, release = 0, 0, 0, 0, 0
         keys = [left, right, jump, shoot, release]
+        # print('counting -----------')
         for i in range(len(self.agent.trees)):
-            refresh_inputs(self.agent.trees[i], inputs)
-            bool =pars_tree(self.agent.trees[i])
+            tree_to_parse = copy.deepcopy(self.agent.trees[i])
+            refresh_inputs(tree_to_parse, inputs)
+            bool = pars_tree(tree_to_parse)
             if bool:
                 keys[i] = 1
             else:
@@ -70,6 +72,7 @@ def refresh_inputs(node, inputs):
     if (node.leftchild == None and node.rightchild == None) :
         if 1 < node.data < 20:
             node.data = inputs[node.data]
+            # print('yes')
     else:
         if node.leftchild != None:
             refresh_inputs(node.leftchild, inputs)
