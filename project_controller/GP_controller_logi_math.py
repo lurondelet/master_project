@@ -82,10 +82,10 @@ def refresh_inputs(node, inputs):
 
 ##mathematical expression operator < > <  = != + logical
 def pars_tree(node):
-    if node.leftchild is not None and node.rightchild is None:
-        node.rightchild = Node(20)
-    if node.leftchild is None and node.rightchild is not None:
-        node.leftchild = Node(20)
+    # if node.leftchild is not None and node.rightchild is None:
+    #     node.rightchild = Node(20)
+    # if node.leftchild is None and node.rightchild is not None:
+    #     node.leftchild = Node(20)
 
     if node.leftchild is None and node.rightchild is None:
         return node.data

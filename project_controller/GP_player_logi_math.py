@@ -126,12 +126,12 @@ def run_experiment(population,enemy_pop,envs,experiment_name):
                 envs[i].play()
                 population.agents[i].fitness += envs[i].fitness_single() / 8
                 enemy_pop.agents[i].fitness -= envs[i].fitness_single() / 8
-        population.new_generation()
-        enemy_pop.new_generation()
         save_build(population=population,
                    enemy_pop=enemy_pop,
                    env=envs[0],
                    experiment_name=experiment_name)
+        population.new_generation()
+        enemy_pop.new_generation()
 
 def run_experiment_static(population,envs,experiment_name):
     for g in range(0, population.gen_number):
@@ -142,10 +142,10 @@ def run_experiment_static(population,envs,experiment_name):
                 envs[i].update_parameter('enemies', [en])
                 envs[i].play()
                 population.agents[i].fitness += envs[i].fitness_single() / 8
-        population.new_generation()
         save_build_static(population=population,
                    env=envs[0],
                    experiment_name=experiment_name)
+        population.new_generation()
 
 def new_run(experiment_name,total_pop,generation,survivor):
     #generate the population for the player
@@ -179,11 +179,11 @@ def new_run_static(experiment_name,total_pop,generation,survivor):
     # for each agent an environment needs to be created to run an instance of the game
     envs = generate_envs(population, experiment_name)
     # loop to fight each enemies
-    run_experiment(population, envs, experiment_name)
+    run_experiment_static(population, envs, experiment_name)
 
 def run_build(experiment_name):
     [population, enemy_pop] = load_build(experiment_name)
-    envs=generate_envs_with_enemy(population,enemy_pop,experiment_name)
+    envs = generate_envs_with_enemy(population,enemy_pop,experiment_name)
     # print_pop(population)
     run_experiment(population, enemy_pop, envs, experiment_name)
 
@@ -213,7 +213,7 @@ def run_best(experiment_name,new_name):
                           level=2
                           )
         new_envs.append(env)
-    print_pop(new_pop)
+    # print_pop(new_pop)
     for i in range(new_pop.pop_number):
         for en in range(1, 9):
             new_envs[i].update_parameter('enemies', [en])
@@ -271,7 +271,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("function",
                     nargs="?",
-                    choices=['new_run',"new_run_static", 'run_build', 'run_best','load_pop'],
+                    choices=['new_run','run_static','merge_exp', 'run_build', 'run_best','load_pop'],
                     default='new_run',
                     )
 args, sub_args = parser.parse_known_args()
@@ -298,7 +298,7 @@ elif args.function == "run_best":
     args = parser.parse_args(sub_args)
     run_best(args.name,args.nUname)
 
-elif args.function == "new_run_static":
+elif args.function == "run_static":
     parser = argparse.ArgumentParser()
     parser.add_argument('name', type=str, help='name of the experience')
     parser.add_argument('tp', type=int, default=10, help='number of agents')
@@ -307,7 +307,7 @@ elif args.function == "new_run_static":
     args = parser.parse_args(sub_args)
     new_run_static(args.name, args.tp, args.gen,args.s)
 
-elif args.function == "new_run_static":
+elif args.function == "merge_exp":
     parser = argparse.ArgumentParser()
     parser.add_argument('merge', type=list, help='name of the experiences in [x,a,b] form')
     parser.add_argument('name', type=str, help='name of the experience')
